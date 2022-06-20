@@ -206,34 +206,72 @@ def tmy(lat, long, loc, rotation, tilts):
     # Filter TMY db for only GHI DNI and DHI
     df_tmy_filtered = df_tmy[['ghi', 'dni', 'dhi']]
 
+    t_start_summer = -4656
+    t_end_summer = -4632
+
+    t_start_winter = -264
+    t_end_winter = -240
+
+    t_start_spring = -6864
+    t_end_spring = -6840
+
+    t_start_fall = -2448
+    t_end_fall = -2424
+
+    if long < -70:
+        t_start_summer = t_start_summer + 6
+        t_end_summer = t_end_summer + 6
+
+        t_start_winter = t_start_winter + 6
+        t_end_winter = t_end_winter + 6
+
+        t_start_spring = t_start_spring + 6
+        t_end_spring = t_end_spring + 6
+
+        t_start_fall = t_start_fall + 6
+        t_end_fall = t_end_fall + 6
+
+    if long > 70:
+        t_start_summer = t_start_summer - 6
+        t_end_summer = t_end_summer - 6
+
+        t_start_winter = t_start_winter - 6
+        t_end_winter = t_end_winter - 6
+
+        t_start_spring = t_start_spring - 6
+        t_end_spring = t_end_spring - 6
+
+        t_start_fall = t_start_fall - 6
+        t_end_fall = t_end_fall - 6
+
     # Plot irradiance db at location (not yet considering panel tilt etc.)
-    df_tmy_filtered.iloc[-4656:-4632].plot()
+    df_tmy_filtered.iloc[t_start_summer:t_end_summer].plot()
     plt.title("Summer Solstice: DNI, DHI, and GHI in a Typical Meteorological Year")
     plt.ylim(-50, 1100)
     plt.ylabel('Irradiance Watt/m^2')
     plt.savefig(f"static/figures/tmy_summer.png")
 
-    # Plot irraidiance db at location (not yet considering panel tilt etc.)
-    df_tmy_filtered.iloc[-4656:-4632].plot()
-    # plt.rcParams["figure.figsize"] = (20, 10)
-    plt.title("Summer Solstice: DNI, DHI, and GHI in a Typical Meteorological Year")
-    plt.ylim(-50, 1100)
-    plt.ylabel('Irradiance Watt/m^2')
-    plt.savefig(f"static/figures/tmy_summer.png")
+    # # Plot irraidiance db at location (not yet considering panel tilt etc.)
+    # df_tmy_filtered.iloc[-4656:-4632].plot()
+    # # plt.rcParams["figure.figsize"] = (20, 10)
+    # plt.title("Summer Solstice: DNI, DHI, and GHI in a Typical Meteorological Year")
+    # plt.ylim(-50, 1100)
+    # plt.ylabel('Irradiance Watt/m^2')
+    # plt.savefig(f"static/figures/tmy_summer.png")
 
-    df_tmy_filtered.iloc[-264:-240].plot()
+    df_tmy_filtered.iloc[t_start_winter:t_end_winter].plot()
     plt.title("Winter Solstice: DNI, DHI, and GHI in a Typical Meteorological Year")
     plt.ylim(-50, 1100)
     plt.ylabel('Irradiance Watt/m^2')
     plt.savefig(f"static/figures/tmy_winter.png")
 
-    df_tmy_filtered.iloc[-6864:-6840].plot()
+    df_tmy_filtered.iloc[t_start_spring:t_end_spring].plot()
     plt.title("Spring Equinox: DNI, DHI, and GHI in a Typical Meteorological Year")
     plt.ylim(-50, 1100)
     plt.ylabel('Irradiance Watt/m^2')
     plt.savefig(f"static/figures/tmy_spring.png")
 
-    df_tmy_filtered.iloc[-2448:-2424].plot()
+    df_tmy_filtered.iloc[t_start_fall:t_end_fall].plot()
     plt.title("Fall Equinox: DNI, DHI, and GHI in a Typical Meteorological Year")
     plt.ylim(-50, 1100)
     plt.ylabel('Irradiance Watt/m^2')
