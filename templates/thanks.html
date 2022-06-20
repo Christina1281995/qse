@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Thank You
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-cz">
+        <h3 style="text-align: center">Thank you for your Feedback</h3>
+        <br>
+        <br>
+        <div class="card" style="width:55%">
+          <img class="card-img-top" src="../static/generic_images/panel_crop.jpg" alt="Card image">
+          <div class="card-img-overlay">
+            <h4 class="card-title">Overall Satisfaction</h4>
+              <br>
+              <p class="card-text" style="font-size: 60px">{{ overall_rating }} / 5 </p>
+          </div>
+        </div>
+        <br>
+        <p style="text-align: center">Quick Solar Estimates now has {{ count_submissions}} feedback submissions.
+            Your input is much appreciated.</p>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <div class="container-top">
+        <h3 style="text-align: left">Get A First Estimate on Your House's Solar Potential</h3>
+        <br>
+        <p style="text-align: left">Are you considering whether to get solar panels mounted on your house but don't know
+            where to start? <br>This website is designed to help you get a basic understanding of the solar potential
+            at your house.<br>
+        <br>
+        <hr>
+    </div>
+    <div class="container-cz" id="capture">
+      <div class="row">
+        <div class="col-left">
+            <p><b>How it Works</b></p>
+            <p style="text-align: left"><b>1. </b>Find your house (or any location of interest) in the map. You can zoom in and out or
+                use the search bar.<br><b>2.</b> Click on the map to drop a mock solar panel at the location.
+                It will appear as a red rectangle. <br>
+                <b>3.</b> Click on the red PV panel to rotate it.  <br>
+                No need to worry about panel tilt. Based on your chosen location, the ideal solar panel tilt for summer,
+                winter, spring/fall, and a year-round fixed panel will be automatically calculated.<br></p>
+            <br>
+            <div id="map" onload="init()">
+                <span id="status"></span>
+                <div id="trackerbox">
+                    <div class="checker">
+                        <label id="tracker" for="track">
+                            Current Position
+                            <input id="track" type="checkbox"/>
+                        </label>
+                    </div>
+                </div>
+                <button id="home"></button>
+            </div>
+            <br/>
+            <div id="coords" style="text-align: left"></div>
+            <div id="next" style="display: none">Once you have chosen a fitting location click:
+                <button type="button" id="btn_next" class="btn btn-secondary btn-sm">Next</button> </div>
+            <br/>
+            <hr>
+            <br/>
+        </div>
+
+        <div class="col-right">
+            <p><b>General Tip on the Panel Rotation</b><p>
+            <p>In the Northern hemisphere, you generally want to rotate your solar panel pointing North and vice versa in
+            the Southern hemisphere. That way the panel will be tilted towards the equator and capture the most sunlight.</p>
+            <img src="../static/generic_images/rotation_assist.png" style="width:100%">
+            <br>
+            <br>
+            <br>
+            <form action="/" method="post" id="mapVariables">
+                <div class="form-group">
+                    <div class="col-xs-2">
+                        <label for="coord_x">Position (Longitude, Latitude) as shown in the Map</label>
+                        <input autocomplete="off" readonly autofocus class="form-control" id="coord_x" name="coord_x" placeholder="X" value="" type="text">
+                        <input autocomplete="off" readonly autofocus class="form-control" id="coord_y" name="coord_y" placeholder="Y" value="" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2">
+                        <label for="rotation">Panel Rotation (° from North) as shown in the Map</label>
+                        <input autocomplete="off" readonly autofocus class="form-control" id="rotation" name="rotation" placeholder="0" value="0" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2">
+                        <label for="surface">Select a Surface Type:</label>
+                        <select name="surface" id="surface">
+                          <option value="grass">Grass</option>
+                          <option value="urban">Urban</option>
+                          <option value="soil">Soil</option>
+                          <option value="asphalt">Asphalt</option>
+                          <option value="concrete">Concrete</option>
+                          <option value="snow">Snow</option>
+                          <option value="aluminum">Aluminum</option>
+                          <option value="sand">Sand</option>
+                          <option value="fresh steel">Fresh Steel</option>
+                          <option value="dirty steel">Dirty Steel</option>
+                        </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="col-xs-2">
+                        <label for="year">Select a year for a historical calculation (a historical year calculation is
+                            one part of your solar estimation):</label>
+                        <select name="year" id="year">
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-primary" type="submit">Calculate</button>
+            </form>
+            <hr>
+        </div>
+      </div>
+    <br>
+
+
+    </div>
+    </div>
+
+    <div id="resultimage">    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,338 @@
+{% extends "layout.html" %}
+{% block title %}
+Results
+{% endblock %}
+{% block main %}
+<div class="container-top">
+    <div class="row">
+        <div class="col-left1">
+       <h3 style="text-align: left">Your Solar Estimation Results</h3>
+       <br>
+        <p style="text-align: left"><b>Calculation Parameters</b><br>
+        Location: {{ location_name }} <br>
+        Coordinates: {{ loc.latitude }}, {{ loc.longitude }} <br>
+        Elevation: {{ loc.altitude }} meters <br>
+        Time-Zone: {{ loc.tz }} <br>
+        Panel Rotation: {{ rotation }}° from North <br>
+        Surface Type on which the Panel is set: {{ surface_type }} <br> <br>
+        <b>Your Optimal Solar Panel Tilts based a Rotation of -32.0° from North </b> <br>
+             Summer: {{ rounded_tilts['summer'] }}° <br>
+             Spring and Fall: {{ rounded_tilts['spring and fall'] }}° <br>
+             Winter: {{ rounded_tilts['winter'] }}° <br>
+             Year-Round: {{ rounded_tilts['year round'] }}°
+       </p>
+        </div>
+        <div class="col-right1">
+{#            <h3 style="text-align: left">Key Concepts to Understand your Calculations</h3>#}
+            <br>
+            <br>
+                <img src="../static/generic_images/concept_irradiance.png" style="width: 100%"
+                     alt="concept of irradiance at solar panel">
+        </div>
+    </div>
+
+        <br>
+        <br>
+       <hr>
+        <br>
+        <br>
+        <h3 style="text-align: left">Clear Sky Daily Peak Irradiance at Your Solar Panel throughout {{ historical_year }}</h3>
+        <br>
+        <br>
+        <p>For reference, at the equator,
+            on a clear day the daily peak of solar irradiance is around 1000 Watts/m<sup>2</sup>. This is the maximum
+            irradiance on Earth. The figures shown here are based on the year you have chosen ({{ historical_year }})
+        and a clear sky model which accurately describes the amount of solar irradiance arriving at your panel (rotated
+        {{ rotation }}°) at various possible tilts.</p>
+
+       <div class="row">
+         <div class="column">
+            <img src="../static/figures/summer.png" alt="Summer Irradiance">
+         </div>
+         <div class="column">
+            <img src="../static/figures/spring and fall.png" alt="Forest">
+         </div>
+      </div>
+           <div class="row">
+         <div class="column">
+            <img src="../static/figures/year round.png" alt="Year Round Irradiance">
+         </div>
+         <div class="column">
+            <img src="../static/figures/winter.png" alt="Mountains">
+         </div>
+      </div>
+    <br>
+    <br>
+    <p><b>poa_global</b>: Plane of Array Global. The total irradiance at your
+        panel per square meter. This measure includes both direct sunlight and indirect sunlight that is scattered
+        through clouds, the ground, and the atmosphere.<br>
+        <b>poa_direct</b>: Plane of Array Direct. The amount of direct sunlight at
+        your panel (per square meter). <br>
+        <b>poa_diffuse</b>: Plane of Array Diffuse. The amount of indirect
+        sunlight at your panel (per square meter). Indirect, or diffuse, sunlight comes from clouds, the atmosphere,
+        and the ground. <br>
+        <b>poa_sky_diffuse</b>: The amount of diffuse sunlight arriving at your panel from the sky (clouds and
+        atmosphere) per square meter. <br>
+        <b>poa_ground_diffuse</b>: The amount of diffuse sunlight arriving at your panel from the ground per
+        square meter. </p>
+    <br>
+    <br>
+  <hr>
+    <br>
+    <br>
+    <h3 style="text-align: left">Hourly Irradiance at Your Location (not panel) based on 10-year Historical Data</h3>
+    <br>
+    <p>The plots shown here represent a "typical meteorological year" (TMY), based on 10 years of historical data
+        collected by the European Commission's Joint Research Center 'PVGIS'. The data set has been produced by
+        choosing for each month the most "typical" month out of 10 years of data. For more information on the composition
+        of a TMY, please visit the European Commission's PVGIS <a href="https://joint-research-centre.ec.europa.eu/pvgis-photovoltaic-geographical-information-system/getting-started-pvgis/pvgis-user-manual_en">user manual</a>.
+    This data is obtained through the European Commission's PVGIS global databases.</p>
+    </div>
+       <div class="row">
+         <div class="column">
+            <img src="../static/figures/tmy_summer.png" alt="Summer">
+         </div>
+         <div class="column">
+            <img src="../static/figures/tmy_spring.png" alt="Spring">
+         </div>
+      </div>
+           <div class="row">
+         <div class="column">
+            <img src="../static/figures/tmy_fall.png" alt="Fall">
+         </div>
+         <div class="column">
+            <img src="../static/figures/tmy_winter.png" alt="winter">
+         </div>
+      </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <h3 style="text-align: left">A Hypothetical Year at Your Panel based on 10-year Historical Data</h3>
+    <br>
+    <p>The plots shown here represent a "typical meteorological year" (TMY), based on 10 years of historical data
+        collected by the European Commission's Joint Research Center 'PVGIS'. The data set has been produced by
+        choosing for each month the most "typical" month out of 10 years of data. For more information on the composition
+        of a TMY, please visit the European Commission's PVGIS <a href="https://joint-research-centre.ec.europa.eu/pvgis-photovoltaic-geographical-information-system/getting-started-pvgis/pvgis-user-manual_en">user manual</a>.
+    This data is obtained through the European Commission's PVGIS global databases.</p>
+    </div>
+       <div class="row">
+            <img src="../static/figures/tmy_hypo_ghi.png" alt="global horizontal irradiance" style="width: 70%">
+      </div>
+      <div class="row">
+            <img src="../static/figures/tmy_hypo_dni.png" alt="direct normal irradiance" style="width: 70%">
+      </div>
+      <div class="row">
+            <img src="../static/figures/tmy_hypo_dhi.png" alt="direct horizontal irradiance" style="width: 70%">
+      </div>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <h4 style="text-align: left">Disclaimer</h4>
+    <p>These solar estimations are here to help you move towards a more serious consideration of whether or
+    not to install solar panels. There is never a guarantee that the historical data displayed here will result
+    in equivalent irradiance levels in the future. Therefore, these results are to be used as a loose guide.</p>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+   <div class="row">
+      <div class="d-flex justify-content-center">
+         <button class="btn btn-primary" id="pdf" style="width: auto">Download Results as PDF</button>
+          {% if session.user_id %}
+          <form action="/results" method="post" id="save">
+               <input type="hidden" id="loc_name" name="loc_name" value="{{ location_name }}">
+               <input type="hidden" id="lat_in" name="lat_in" value="{{ lat_in }}">
+               <input type="hidden" id="long_in" name="long_in" value="{{ long_in }}">
+               <input type="hidden" id="rotate_in" name="rotate_in" value="{{ rotation }}">
+               <input type="hidden" id="surface_type" name="surface_type" value="{{ surface_type }}">
+               <input type="hidden" id="year" name="year" value="{{ historical_year }}">
+            <button class="btn btn-primary" type="submit">Save</button>
+          </form>
+          {% else %}
+          <br>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To save your searches, you must be logged in.</p>
+          {% endif %}
+
+
+      </div>
+
+
+      <div id="output">
+         {#            {{ image }}#}
+      </div>
+      <script>
+         // generate PDF
+         document.getElementById("pdf").onclick = function() {
+             window.jsPDF = window.jspdf.jsPDF
+             var doc = new jsPDF();
+             // /* from left, from top, across, down *
+
+             // PAGE 1 - General Stuff
+             doc.setFont('helvetica')
+             doc.setFontSize(30);
+             doc.text(15, 20, 'Your Quick Solar Estimates');
+
+             doc.setFontSize(7);
+             doc.setTextColor(150);
+             doc.text(15, 26, 'Calculation for {{ location_name }}. Calculated on {{ today }}.');
+
+             doc.setFontSize(12);
+             doc.setTextColor(1, 1, 1);
+             doc.text(15, 40, "Calculation Parameters");
+             doc.setFontSize(9);
+             doc.text(15, 47, "Location: {{ location_name }};  {{ loc.latitude }}, {{ loc.longitude }}")
+             doc.text(15, 52, "Elevation: {{ loc.altitude }} meters")
+             doc.text(15, 57, "Time-Zone: {{ loc.tz }}")
+             doc.text(15, 62, "Panel Rotation: {{ rotation }}° from North")
+             doc.text(15, 67, "Surface Type on which the Panel is set: {{ surface_type }}")
+
+             doc.setFontSize(12);
+             doc.text(15, 80, "Your Optimal Solar Panel Tilts based a Rotation of {{ rotation }}° from North");
+             doc.setFontSize(9);
+             doc.text(15, 87, "Summer: {{ rounded_tilts['summer'] }}°");
+             doc.text(15, 92, "Spring and Fall: {{ rounded_tilts['spring and fall'] }}°");
+             doc.text(15, 97, "Winter: {{ rounded_tilts['winter'] }}°");
+             doc.text(15, 102, "Year-Round: {{ rounded_tilts['year round'] }}°");
+
+             doc.addImage("../static/generic_images/concept_irradiance.png", "JPEG", 15, 112, 170, 70);
+             doc.text(15, 185, "The following calculations have been derived using pvlib, a python package containing" +
+                 "functions to simulate photovoltaic energy systems and solar irradiance. In combination with pvlib," +
+                 " 10-year historical data from the European Commission's PVGIS (photovoltaic geographic information " +
+                 "system) has been accessed for your chosen location. The results of the calculations have been cleaned" +
+                 "and graphically visualised for your convenience.", {maxWidth: 180});
+
+             doc.text(15, 205, "Visit ")
+             doc.text(15, 210, "Visit ")
+             doc.setTextColor(1, 1, 210);
+             doc.textWithLink('pvlib', 22, 205, {url: 'https://pvlib-python.readthedocs.io/en/stable/' });
+             doc.textWithLink('PVGIS', 22, 210,
+                 {url: 'https://joint-research-centre.ec.europa.eu/pvgis-photovoltaic-geographical-information-system_en'});
+
+             doc.addImage("../static/generic_images/footer.png", "JPEG", 4, 260, 200, 30);
+
+
+             // PAGE 2 - PVLIB 2019 - 2020 Results
+             doc.addPage();
+             doc.setFontSize(12);
+             doc.setTextColor(1, 1, 1);
+             doc.text(15, 20, "Clear Sky Daily Peak Irradiance at Your Solar Panel throughout {{ historical_year }}");
+             doc.setFontSize(9);
+             doc.text(15, 30, "For reference, at the equator, on a clear day the daily peak of solar irradiance is " +
+                 "around 1000 Watts/m2. This is the maximum irradiance on Earth. The figures shown here " +
+                 "are based on the year you have chosen ({{ historical_year }}) and a clear sky model which " +
+                 "accurately describes the amount of solar irradiance arriving at your panel (rotated " +
+                 "{{ rotation }}°) at various possible tilts.", {maxWidth: 180})
+             doc.text(15, 45, "What the Legend items mean:");
+             doc.text(15, 50, "poa_global: Plane of Array Global. The total irradiance at your panel per square " +
+                 "meter. This measure includes both direct sunlight and indirect sunlight that is scattered through " +
+                 "clouds, the ground, and the atmosphere.", {maxWidth: 180});
+             doc.text(15, 58, "poa_direct: Plane of Array Direct. The amount of direct sunlight at your panel " +
+                 "(per square meter).", {maxWidth: 180});
+             doc.text(15, 62, "poa_diffuse: Plane of Array Diffuse. The amount of indirect sunlight at your panel " +
+                 "(per square meter). Indirect, or diffuse, sunlight comes from clouds, the atmosphere, and the " +
+                 "ground.", {maxWidth: 180});
+             doc.text(15, 70, "poa_sky_diffuse: The amount of diffuse sunlight arriving at your panel from the " +
+                 "sky (clouds and atmosphere) per square meter.", {maxWidth: 180});
+             doc.text(15, 75, "poa_ground_diffuse: The amount of diffuse sunlight arriving at your panel from " +
+                 "the ground per square meter.", {maxWidth: 180});
+             doc.addImage("../static/figures/summer.png", "JPEG", 15, 77, 128, 95);
+             doc.addImage("../static/figures/winter.png", "JPEG", 15, 170, 128, 95);
+             doc.addImage("../static/generic_images/footer.png", "JPEG", 4, 260, 200, 30);
+
+             // PAGE 3
+             doc.addPage();
+             doc.addImage("../static/figures/spring and fall.png", "JPEG", 15, 20, 135, 100);
+             doc.addImage("../static/figures/year round.png", "JPEG", 15, 120, 135, 100);
+             doc.addImage("../static/generic_images/footer.png", "JPEG", 4, 260, 200, 30);
+
+             // PAGE 4 - HOURLY DATA
+             doc.addPage();
+             doc.setFontSize(12);
+             doc.text(15, 20, "Hourly Irradiance at Your Location (not panel) based on 10-year Historical Data")
+             doc.setFontSize(9);
+             doc.text(15, 30, "The plots shown here represent a 'typical meteorological year' (TMY), based on 10 years " +
+                 "of historical data collected by the European Commission's Joint Research Center 'PVGIS'. The " +
+                 "data set has been produced by choosing for each month the most 'typical' month out of 10 " +
+                 "years of data. For more information on the composition of a TMY, please visit the European " +
+                 "Commission's PVGIS user manual. This data is obtained through the European Commission's PVGIS " +
+                 "global databases.", {maxWidth: 180});
+             doc.text(15, 46, "Visit the ")
+             doc.setTextColor(1, 1, 210);
+             doc.textWithLink(' user manual', 26, 46, {url: 'https://joint-research-centre.ec.europa.eu/pvgis-photovoltaic-geographical-information-system/getting-started-pvgis/pvgis-user-manual_en' });
+             doc.addImage("../static/figures/tmy_summer.png", "JPEG", 15, 50, 135, 100);
+             doc.addImage("../static/figures/tmy_winter.png", "JPEG", 15, 150, 135, 100);
+             doc.addImage("../static/generic_images/footer.png", "JPEG", 4, 260, 200, 30);
+
+             // PAGE 5 - HOURY DATA CONTINUED
+             doc.addPage();
+             doc.addImage("../static/figures/tmy_spring.png", "JPEG", 15, 20, 135, 100);
+             doc.addImage("../static/figures/tmy_fall.png", "JPEG", 15, 130, 135, 100);
+             doc.addImage("../static/generic_images/footer.png", "JPEG", 4, 260, 200, 30);
+
+             // PAGE 6 - HYPOTHETICAL YEAR
+             doc.addPage();
+             doc.setFontSize(12);
+             doc.setTextColor(1, 1, 1);
+             doc.text(15, 20, "A Hypothetical Year at Your Panel based on 10-year Historical Data");
+             doc.setFontSize(9);
+             doc.text(15, 30, "The plots shown here represent a 'typical meteorological year' (TMY), based on 10 years " +
+                 "of historical data collected by the European Commission's Joint Research Center 'PVGIS'. The " +
+                 "data set has been produced by choosing for each month the most 'typical' month out of 10 " +
+                 "years of data. For more information on the composition of a TMY, please visit the European " +
+                 "Commission's PVGIS user manual. This data is obtained through the European Commission's PVGIS " +
+                 "global databases.", {maxWidth: 180});
+             doc.text(15, 46, "Visit the ")
+             doc.setTextColor(1, 1, 210);
+             doc.textWithLink(' user manual', 26, 46, {url: 'https://joint-research-centre.ec.europa.eu/pvgis-photovoltaic-geographical-information-system/getting-started-pvgis/pvgis-user-manual_en' });
+             doc.addImage("../static/figures/tmy_hypo_ghi.png", "JPEG", 15, 48, 170, 75);
+             doc.addImage("../static/figures/tmy_hypo_dni.png", "JPEG", 15, 118, 170, 75);
+             doc.addImage("../static/figures/tmy_hypo_dhi.png", "JPEG", 15, 189, 170, 75);
+             doc.addImage("../static/generic_images/footer.png", "JPEG", 4, 260, 200, 30);
+
+             // PAGE 7 - DISCLAIMER
+             doc.addPage();
+             doc.setFontSize(12);
+             doc.setTextColor(1, 1, 1);
+             doc.text(15, 20, "Disclaimers, Data, and Contact Information")
+             doc.setFontSize(9);
+             doc.text(15,30, "These solar estimations are here to help you move towards a more serious consideration" +
+                 " of whether or not to install solar panels. There is never a guarantee that the historical data " +
+                 "displayed here will result in equivalent irradiance levels in the future. Therefore, these results " +
+                 "are to be used as a loose guide.", {maxWidth: 180});
+             doc.text(15, 50, "pvlib");
+             doc.setTextColor(70, 70, 70);
+             doc.text(15, 56, "version used: {{ version }}");
+             doc.text(15, 62, "William F. Holmgren, Clifford W. Hansen, and Mark A. Mikofski. " +
+                 "'pvlib python: a python package for modeling solar energy systems.' Journal of Open Source " +
+                 "Software, 3(29), 884, (2018). https://doi.org/10.21105/joss.00884", {maxWidth: 180});
+             doc.addImage("../static/generic_images/pvlib_powered_logo_horiz (1).png", "JPEG", 15, 70, 46, 20);
+
+             doc.setTextColor(1, 1, 1)
+             doc.text(15, 110, "PVGIS");
+             doc.setTextColor(70, 70, 70);
+             doc.text(15, 116, "Huld, T., Müller, R. and Gambardella, A., 2012. 'A new solar radiation " +
+                 "database for estimating PV performance in Europe and Africa'. Solar Energy, 86, 1803-1815.",
+                 {maxWidth: 180})
+             doc.addImage("../static/generic_images/PVGIS Coverage.png", "JPEG", 15, 127, 120, 70);
+
+             doc.setTextColor(1, 1, 1)
+             doc.text(15, 210, "Contact Information");
+             doc.setTextColor(70, 70, 70);
+             doc.text(15, 216, "Christina Zorenböhmer, christina.zorenboehmer@plus.ac.at, University of Salzburg " +
+                 "Department of Geoinformatics Z_GIS", {maxWidth: 180})
+
+             doc.addImage("../static/generic_images/footer.png", "JPEG", 4, 260, 200, 30);
+
+
+             doc.save('Solar Estimates for {{ location_name }}.pdf');
+         }
+      </script>
+   </div>
+{% endblock %}

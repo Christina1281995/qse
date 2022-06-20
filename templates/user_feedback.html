@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    User Feedback
+{% endblock %}
+
+{% block main %}
+    <div class="alert" style="display: {{ show }}">
+      <span class="closebtn">&times;</span>
+      <strong>Notice:</strong> Please select a rating for all 5 categories (a comment is optional).
+    </div>
+    <script>
+        var close = document.getElementsByClassName("closebtn");
+        var i;
+
+        for (i = 0; i < close.length; i++) {
+          close[i].onclick = function(){
+            var div = this.parentElement;
+            div.style.opacity = "0";
+            setTimeout(function(){ div.style.display = "none"; }, 600);
+          }
+        }
+    </script>
+    <h2 style="text-align: center">Feedback</h2>
+    <br>
+
+    <p style="text-align: center"><i>By filling in this form you will assist the improvement of this platform. Any constructive feedback is highly
+        appreciated.</i></p>
+    <br>
+    <hr>
+    <br>
+
+    <form name="feedback" action="/userfeedback" method="post">
+
+        <div class="form-group" style="text-align: center">
+            <label for="fb-1">1. How would you rate your overall satisfaction with this platform?</label><br>
+            <div class="rating1">
+                <input type="radio" name="rating1" value="5" id="5-1"><label for="5-1">☆</label>
+                <input type="radio" name="rating1" value="4" id="4-1"><label for="4-1">☆</label>
+                <input type="radio" name="rating1" value="3" id="3-1"><label for="3-1">☆</label>
+                <input type="radio" name="rating1" value="2" id="2-1"><label for="2-1">☆</label>
+                <input type="radio" name="rating1" value="1" id="1-1"><label for="1-1">☆</label>
+            </div><br><br><br>
+        </div>
+
+        <div class="form-group" style="text-align: center">
+            <label for="fb-2">2. How would you rate your interaction with the map?</label><br>
+            <div class="rating2">
+                <input type="radio" name="rating2" value="5" id="5-2"><label for="5-2">☆</label>
+                <input type="radio" name="rating2" value="4" id="4-2"><label for="4-2">☆</label>
+                <input type="radio" name="rating2" value="3" id="3-2"><label for="3-2">☆</label>
+                <input type="radio" name="rating2" value="2" id="2-2"><label for="2-2">☆</label>
+                <input type="radio" name="rating2" value="1" id="1-2"><label for="1-2">☆</label>
+            </div><br><br><br>
+        </div>
+
+        <div class="form-group" style="text-align: center">
+            <label for="fb-3">3. Were you able to understand how to use the platform intuitively?</label><br>
+            <div class="rating3">
+                <input type="radio" name="rating3" value="5" id="5-3"><label for="5-3">☆</label>
+                <input type="radio" name="rating3" value="4" id="4-3"><label for="4-3">☆</label>
+                <input type="radio" name="rating3" value="3" id="3-3"><label for="3-3">☆</label>
+                <input type="radio" name="rating3" value="2" id="2-3"><label for="2-3">☆</label>
+                <input type="radio" name="rating3" value="1" id="1-3"><label for="1-3">☆</label>
+            </div><br><br><br>
+        </div>
+
+        <div class="form-group" style="text-align: center">
+            <label for="fb-4">4. Were the results clear?</label><br>
+            <div class="rating4">
+                <input type="radio" name="rating4" value="5" id="5-4"><label for="5-4">☆</label>
+                <input type="radio" name="rating4" value="4" id="4-4"><label for="4-4">☆</label>
+                <input type="radio" name="rating4" value="3" id="3-4"><label for="3-4">☆</label>
+                <input type="radio" name="rating4" value="2" id="2-4"><label for="2-4">☆</label>
+                <input type="radio" name="rating4" value="1" id="1-4"><label for="1-4">☆</label>
+            </div><br><br><br>
+        </div>
+
+        <div class="form-group" style="text-align: center">
+            <label for="fb-5">5. Would you recommend this platform to others?</label><br>
+            <div class="rating5">
+                <input type="radio" name="rating5" value="5" id="5-5"><label for="5-5">☆</label>
+                <input type="radio" name="rating5" value="4" id="4-5"><label for="4-5">☆</label>
+                <input type="radio" name="rating5" value="3" id="3-5"><label for="3-5">☆</label>
+                <input type="radio" name="rating5" value="2" id="2-5"><label for="2-5">☆</label>
+                <input type="radio" name="rating5" value="1" id="1-5"><label for="1-5">☆</label>
+            </div><br><br><br>
+        </div>
+        <div class="form-inline justify-content-center" style="text-align: center">
+            <label>
+                <input autocomplete="off" class="form-control span6" name="further"
+                       placeholder="Add any further comments or suggestions here" style="width: 500px" type="text">
+            </label>
+        </div>
+
+        <br>
+        <br>
+        <div style="text-align: center">
+            <button class="btn btn-primary" type="submit"> Send </button>
+        </div>
+    </form>
+{% endblock %}

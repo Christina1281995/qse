@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}
+About
+{% endblock %}
+{% block main %}
+<div class="container-top">
+   <h3 style="text-align: left">About the Quick Solar Estimates Project</h3>
+   <hr>
+   <div class="container-cz">
+       <div class="row">
+           <div class="col-left">
+                <img src="../static/generic_images/poster.jpg">
+          </div>
+           <div class="col-right">
+               <h4>Aim</h4>
+               <p>This project is intended to help <b>you</b> take a first look into solar panels for your own home.
+                   Many websites out there can be quite complex (how are we supposed to know what the exact tilt and
+                   orientation of our roofs are... in degrees?!). <br><br>This website is therefore designed to give
+                   you a basic first insight into the solar potential. The main focus is simply to get you started on
+                   your own <b>journey towards sustainable energy.</b></p>
+               <br>
+               <h4>Details</h4>
+               <p>At its core, this platform uses an open source python package called pvlib to work with your input
+               (coordinates, rotation, and surface type) to calculate total irradiance at various possible solar panel
+               tilts. In the background, when you click "calculate" a few additional pieces of information are pulled
+               together, e.g. the elevation above sea level, a representative address, and the solar angles at your
+               chosen location. Using all this information, two methods are applied to create your estimations. <br><br>
+                   <b>1.</b> A pvlib internal calculation <br><br>
+                   <b>2.</b> A 10-year collection of solar data at your chosen location is grabbed from the European Commission's
+               PVGIS databases to perform an solar potential estimation with a so-called typical meteorological year
+               (TMY). Such a TMY is simply created from the average values over those 10 years of data. Using this TMY
+               a good indication can be generated about the solar irradiance.
+               </p>
+
+               <br>
+               <h4>The Complete Source Code</h4>
+               <p>In case you're interested in taking a closer look at how this platform is set up, head to .... .</p>
+
+               <br>
+               <h4>Contact</h4>
+               <p>If you'd like to get in touch or find out more about who created this platform, feel free to get in
+                   touch. <br><br><b>Email: </b>christina.zorenboehmer@plus.ac.at<br>
+                   <b>Website: </b><a href="https://www.zorenboehmer.com">https://www.zorenboehmer.com</a></p>
+           </div>
+       </div>
+   </div>
+
+  <hr>
+
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Saved Searches
+{% endblock %}
+
+{% block main %}
+    <div class="container-cz" id="capture">
+        <div class="row1">
+            <h3> Your Saved Searches</h3>
+                <table class="table">
+                      <thead class="thead-light">
+                        <tr>
+{#                            <th>Snapshot</th>#}
+                            <th>Location</th>
+                            <th>Date and Time</th>
+                            <th>Rotation</th>
+{#                            <th>Clearsky Maximum Irradiance</th>#}
+                        </tr>
+                      </thead>
+                    <tbody>
+                        {% for entry in user_searches %}
+                            <tr>
+{#                                <td style="text-align: left"> Blank </td>#}
+                                <td style="text-align: left"> {{ entry.loc_name }}</td>
+                                <td style="text-align: left"> {{ entry.date }}</td>
+                                <td style="text-align: left"> {{ entry.rotate_in }}</td>
+{#                                <td style="text-align: left"> Blank </td>#}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <br>
+        <div class="row1">
+
+            <h3>Calculate Again for Full Results</h3>
+                <form name="redo" action="/savedsearches" method="post">
+                    <div class="form-group">
+                        <div class="col-xs-2">
+                            <label for="redo">Select one of your previous searches:</label>
+                            <select name="redo" id="redo">
+                                {% for entry in user_searches %}
+                                  <option value="{{ entry.id }}">{{ entry.loc_name }}, calculated on {{ entry.date }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Calculate</button>
+                </form>
+        </div>
+    </div>
+{% endblock %}
