@@ -12,9 +12,6 @@ This website is therefore designed to give you a basic first insight into the so
  <br>
  <br>
  <br>
- <br>
- <br>
- <br>
  <br> <br>
  <br>
 
