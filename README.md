@@ -7,7 +7,7 @@ This project is intended to help <b>you</b> take a first look into solar panels 
 This website is therefore designed to give you a basic first insight into the solar potential. The main focus is simply to get you started on your own <b>journey towards sustainable energy</b>.
 
 <br>
-<b>Visit the Live Website</b> at http://qse.zorenboehmer.com/
+<b>Visit the Live Website</b> at http://quicksolarestimates.zorenboehmer.com/
  <br>
  <br>
 
